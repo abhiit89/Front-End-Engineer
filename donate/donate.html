@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="donate">
+
+<head>
+    <title>Donate for A Cause</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+    <script src="donate.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="donate.css" rel="stylesheet">
+</head>
+
+<body ng-controller="donateController">
+    <div class="jumbotron vertical-center">
+        <div class="container">
+            <div class="row">
+                <div class="progress progress-custom">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="{{percentage}}" aria-valuemin="0" aria-valuemax="100" ng-style="{width : ( percentage + '%' ) }">
+                        <span class="sr-only">{{percentage}}% Complete (warning)</span>
+                    </div>
+                </div>
+                <div>
+                    <div>Only 3 days to finish this project</div>
+                    <div>
+                        Join the 42 other donors who have already supported this project.Every dollar helps.
+                    </div>
+                    <div>
+                        <input type="text" placeholder="$50 " ng-model="amount">
+                        <div>
+                            <button class="btn btn-success" ng-click="getPercentage()">Give Now</button>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="#">Why give $50?</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <button type="submit" class="btn btn-default btn-lg" onclick="alert('Saved')">Save for Later</button>
+                <button type="submit" class="btn btn-default btn-lg">Tell Your Friends</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
