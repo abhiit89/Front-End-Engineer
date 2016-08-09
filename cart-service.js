@@ -1,14 +1,13 @@
 angular.module('services.cart', [])
-    .service('Cart', ['$rootScope', 'Reviewer', function ($rootScope, Reviewer) {
+    .service('Cart', ['$rootScope', 'Reviewer', function($rootScope, Reviewer) {
         /*
          * Function to fetch the cart from the localStorage, if it exists
          */
-        var getCart = function () {
+        this.getCart = function() {
             if (localStorage.getItem("cart") != null) {
                 var cart = JSON.parse(localStorage.getItem("cart"));
                 return cart;
-            }
-            else {
+            } else {
                 return false;
             }
         };
@@ -16,7 +15,7 @@ angular.module('services.cart', [])
         /*
          * Function to add item to the cart
          */
-        var addItem = function (item, quantity, cart) {
+        this.addItem = function(item, quantity, cart) {
             if (!cart && !item && !quantity) {
                 return;
             }
@@ -29,11 +28,11 @@ angular.module('services.cart', [])
          * Multiple items are passed as an object items in argument to the function addItems.
          * items object contains key value pair as item and its quantity
          */
-        var addItems = function (items, cart) {
+        this.addItems = function(items, cart) {
             if (!items && !cart) {
                 return;
             }
-            angular.forEach(items, function (value, key) {
+            angular.forEach(items, function(value, key) {
                 cart[key] = value;
             });
             return cart;
@@ -43,15 +42,14 @@ angular.module('services.cart', [])
          * Function to save the cart to the localStorage, after checking if it can be persisted,
          * through Reviewer Service
          */
-        var save = function (cart) {
+        this.save = function(cart) {
             if (!cart) {
                 return;
             }
             if (Reviewer(cart)) {
                 persist(cart);
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
         };
@@ -59,7 +57,7 @@ angular.module('services.cart', [])
         /*
          * Remove the items from the cart
          */
-        var remove = function (item, cart) {
+        this.remove = function(item, cart) {
             if (!item && !cart) {
                 return;
             }
@@ -67,8 +65,7 @@ angular.module('services.cart', [])
                 var cart = JSON.parse(localStorage.getItem("cart"));
                 delete cart.item;
 
-            }
-            else {
+            } else {
                 delete cart.item;
             }
             persist(cart);
@@ -77,14 +74,14 @@ angular.module('services.cart', [])
         /*
          * Clears the Cart from the localStorage
          */
-        var clear = function () {
+        this.clear = function() {
             localStorage.removeItem("cart");
         };
 
         /*
          * Save the Cart to the localStorage
          */
-        var persist = function (cart) {
+        this.persist = function(cart) {
             if (!cart) {
                 return;
             }
@@ -94,12 +91,11 @@ angular.module('services.cart', [])
         /*
          * Change the quantity of an Item in the Cart
          */
-        var changeQuantity = function (item, quantity, cart) {
+        this.changeQuantity = function(item, quantity, cart) {
             if (!cart) {
                 var cart = JSON.parse(localStorage.getItem("cart"));
                 cart[item] = quantity;
-            }
-            else {
+            } else {
                 cart[item] = quantity;
             }
             persist(cart);
@@ -108,7 +104,7 @@ angular.module('services.cart', [])
         /*
          * Notifies the application that the cart has been persisted.
          */
-        var refresh = function (cart) {
+        this.refresh = function(cart) {
             return Reviewer(cart);
         };
     }]);
